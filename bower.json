@@ -4,10 +4,10 @@
   "authors": [
     "FireVolkhov <FireVolkhov@gmail.com>"
   ],
-  "description": "Просмотрот репозитарий на гитхабе",
+  "description": "Просмотрот задач",
   "main": "index.html",
   "keywords": [
-    "github",
+    "tasker",
     "view"
   ],
   "license": "MIT",
