@@ -6,3 +6,8 @@
  * @mail FireVolkhov@gmail.com
  */
 "use strict";
+
+angular.module('appController', [])
+	.controller('appController', function(){
+
+	});

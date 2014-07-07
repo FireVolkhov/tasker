@@ -6,3 +6,23 @@
  * @mail FireVolkhov@gmail.com
  */
 "use strict";
+
+angular.module('tasker', ['appController', 'taskList', 'ui.router'])
+	.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', '$httpProvider', function($locationProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
+		$urlRouterProvider.otherwise("/");
+		$stateProvider
+			.state('tasks-list', {
+				url: "/",
+				templateUrl: "app/tasks-list/tasks-list.html",
+				controller: 'taskListController as tasksCtrl'
+			});
+
+		// Ошибки сервера сразу в текст
+		$httpProvider.defaults.transformResponse.push(function(data){
+		    if (angular.isObject(data) && data.error){
+				return data.error;
+			}
+			return data;
+		});
+	}])
+;
