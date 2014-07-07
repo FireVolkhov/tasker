@@ -1,0 +1,29 @@
+.taskDirective > .task-isFinished-container {
+  float: left;
+  padding: 5px;
+}
+.taskDirective.task-status-finished .task-text {
+  color: #c0c0c0;
+}
+.taskDirective.task-status-finished .task-dueTime {
+  color: #008000;
+}
+.taskDirective.task-status-today .task-dueTime {
+  color: #0000ff;
+}
+.taskDirective.task-status-later .task-dueTime {
+  color: #c0c0c0;
+}
+.taskDirective.task-status-overdue .task-dueTime {
+  color: #ff0000;
+}
+.taskDirective .task-hideButton {
+  text-align: right;
+  display: none;
+}
+.taskDirective:hover .task-hideButton {
+  display: inline;
+}
+.tasksList > .taskList-nowTime {
+  text-align: right;
+}
