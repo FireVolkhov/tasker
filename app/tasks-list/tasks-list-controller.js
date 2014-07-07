@@ -9,6 +9,7 @@
 
 angular.module('taskList', ['task-service', 'task-directive'])
 	.controller('taskListController', ['Task', function(Task){
+		this.nowTime = Task.getNowTime();
 		this.tasks = Task.getAll();
 	}])
 ;

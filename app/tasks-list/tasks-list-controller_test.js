@@ -12,7 +12,7 @@ describe('tasks-list', function(){
 
 	it('Отображение списка задач', function() {
 		texts.forEach(function(text){
-			expect(element(by.css('.tasks-list')).getText()).toContain(text);
+			expect(element(by.css('.tasksList')).getText()).toContain(text);
 		});
 	});
 });
