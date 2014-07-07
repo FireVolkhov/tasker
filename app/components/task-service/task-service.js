@@ -46,7 +46,7 @@ angular.module('task-service', [])
 
 				tasks = [];
 				tasks.$resolved = false;
-				tasks.$promise = $http.get('/getData.json')
+				tasks.$promise = $http.get('./GetData.json')
 					.finally(function(){
 						tasks.$resolved = true;
 					})
@@ -80,7 +80,7 @@ angular.module('task-service', [])
 		    var task = this;
 
 			task.$resolved = false;
-			task.$promise = $http.post('/saveTask.json')
+			task.$promise = $http.post('./SaveTask.json')
 				.finally(function(){
 				    task.$resolved = true;
 				})

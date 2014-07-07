@@ -75,14 +75,14 @@ module.exports = function() {
 			// Пропускаем запросы к темам
 			$httpBackend.whenGET(/.*\.html/).passThrough();
 
-			$httpBackend.whenGET('/getData.json').respond(function(method, url, data){
+			$httpBackend.whenGET('./GetData.json').respond(function(method, url, data){
 				var data = {
 					"Today": "2014-07-04T10:00:00.000Z",
 					"Items": tasks
 				};
 			    return [200, angular.toJson(data), {}];
 			});
-			$httpBackend.whenPOST('/saveTask.json').respond(function(method, url, data){
+			$httpBackend.whenPOST('./SaveTask.json').respond(function(method, url, data){
 				var task;
 
 			    if (data.Id){
