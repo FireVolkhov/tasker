@@ -25,6 +25,7 @@
     "angular-ui-router": "~0.2.10",
     "angular-ui": "~0.4.0",
     "angular": "~1.2.16",
-	"angular-resource": "~1.2.16"
+	"angular-resource": "~1.2.16",
+	"angular-mocks": "~1.2.16"
   }
 }
