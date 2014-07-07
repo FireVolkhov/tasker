@@ -16,13 +16,5 @@ angular.module('tasker', ['appController', 'taskList', 'ui.router'])
 				templateUrl: "app/tasks-list/tasks-list.html",
 				controller: 'taskListController as tasksCtrl'
 			});
-
-		// Ошибки сервера сразу в текст
-		$httpProvider.defaults.transformResponse.push(function(data){
-		    if (angular.isObject(data) && data.error){
-				return data.error;
-			}
-			return data;
-		});
 	}])
 ;
