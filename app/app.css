@@ -1,3 +1,13 @@
+@font-face {
+  font-family: "PF DinDisplay Pro Light";
+  src: url('fonts/pfdindisplaypro-light-webfont.eot');
+  src: url('fonts/pfdindisplaypro-light-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/pfdindisplaypro-light-webfont.woff') format('woff'), url('fonts/pfdindisplaypro-light-webfont.ttf') format('truetype'), url('fonts/pfdindisplaypro-light-webfont.svg#pf_dindisplay_prolight') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  font-family: "PF DinDisplay Pro Light", Verdana, Arial, Helvetica, sans-serif;
+}
 .taskDirective > .task-isFinished-container {
   float: left;
   padding: 5px;
