@@ -7,7 +7,7 @@
  */
 "use strict";
 
-angular.module('tasker', ['appController', 'taskList', 'ui.router'])
+angular.module('tasker', ['appController', 'taskList', 'top-menu', 'ui.router'])
 	.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', '$httpProvider', function($locationProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
 		$urlRouterProvider.otherwise("/");
 		$stateProvider

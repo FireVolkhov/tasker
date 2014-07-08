@@ -37,3 +37,19 @@ body {
 .tasksList > .taskList-nowTime {
   text-align: right;
 }
+.topMenu {
+  border-bottom: 1px solid;
+  margin-bottom: 10px;
+  padding: 10px 0px;
+}
+.topMenu .topMenu-search-container,
+.topMenu .topMenu-buttons-container {
+  display: inline-block;
+}
+.topMenu .topMenu-search-container {
+  width: 70%;
+}
+.topMenu .topMenu-buttons-container {
+  width: 29%;
+  text-align: right;
+}
