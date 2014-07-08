@@ -7,7 +7,7 @@
  */
 "use strict";
 
-angular.module('top-menu', ['template/top-menu/top-menu.html'])
+angular.module('top-menu', ['template/top-menu/top-menu.html', 'add-new-task-button-directive'])
 	.directive('topMenu', [function(){
 		return {
 			replace: true,
@@ -24,7 +24,7 @@ angular.module('template/top-menu/top-menu.html', []).run(['$templateCache', fun
 			'			<input type="text" class="form-control" placeholder="Search">' +
 			'		</div>' +
 			'		<div class="topMenu-buttons-container">' +
-			'			<i class="glyphicon glyphicon-plus"></i>' +
+			'			<div add-new-task-button></div>' +
 			'		</div>' +
 			'	</div><!-- /.container-fluid -->' +
 			'</nav>'
