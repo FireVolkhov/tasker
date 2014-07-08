@@ -15,16 +15,16 @@ body {
 .taskDirective.task-status-finished .task-text {
   color: #c0c0c0;
 }
-.taskDirective.task-status-finished .task-dueTime {
+.taskDirective.task-status-finished .task-dueTime span {
   color: #008000;
 }
-.taskDirective.task-status-today .task-dueTime {
+.taskDirective.task-status-today .task-dueTime span {
   color: #0000ff;
 }
-.taskDirective.task-status-later .task-dueTime {
+.taskDirective.task-status-later .task-dueTime span {
   color: #c0c0c0;
 }
-.taskDirective.task-status-overdue .task-dueTime {
+.taskDirective.task-status-overdue .task-dueTime span {
   color: #ff0000;
 }
 .taskDirective .task-hideButton {

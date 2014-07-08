@@ -7,7 +7,7 @@
  */
 "use strict";
 
-angular.module('top-menu', ['template/top-menu/top-menu.html', 'add-new-task-button-directive'])
+angular.module('top-menu', ['template/top-menu/top-menu.html', 'add-new-task-button-directive', 'search-directive'])
 	.directive('topMenu', [function(){
 		return {
 			replace: true,
@@ -21,7 +21,7 @@ angular.module('template/top-menu/top-menu.html', []).run(['$templateCache', fun
 			'<nav class="topMenu">' +
 			'	<div class="container">' +
 			'		<div class="topMenu-search-container">' +
-			'			<input type="text" class="form-control" placeholder="Search">' +
+			'			<div search></div>' +
 			'		</div>' +
 			'		<div class="topMenu-buttons-container">' +
 			'			<div add-new-task-button></div>' +
