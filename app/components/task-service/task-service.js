@@ -32,6 +32,8 @@ angular.module('task-service', [])
 			this.FinishTime = null;
 
 			this.$status = null;
+			this.$edit = false;
+			this.$hide = false;
 
 			this.$resolved = true;
 			this.$promise = null;
@@ -101,13 +103,25 @@ angular.module('task-service', [])
 		    var task = this;
 
 			task.$resolved = false;
-			task.$promise = $http.post('./SaveTask.json')
+			task.$promise = $http.post('./SaveTask.json', task)
 				.finally(function(){
 				    task.$resolved = true;
 				})
 				.then(checkError)
+				// Велосипед для тестов через json файлы
 				.then(function(result){
-				    return angular.extend(task, result.data);
+				    if (!result.data || !result.data.Text){
+						result.data = angular.fromJson(angular.toJson(task));
+					}
+					return result;
+				})
+				.then(function(result){
+					// Без Id значит создана новая задача добавляем в общий список
+					if (!task.Id) tasks.push(task);
+				    angular.extend(task, transformServerData(result.data));
+					task.$edit = false;
+					task.$hide = false;
+					return task;
 				});
 
 			return task;
@@ -128,10 +142,6 @@ angular.module('task-service', [])
 		 * @returns {*}
 		 */
 		function transformServerData(task){
-			task.CreateTime = new Date(task.CreateTime) || null;
-			task.DueTime = new Date(task.DueTime) || null;
-			task.FinishTime = new Date(task.FinishTime) || null;
-
 			if (task.IsFinished){
 				task.$status = TASK_STATUS.FINISHED;
 			} else if (task.DueTime < today){
