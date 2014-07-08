@@ -83,7 +83,8 @@ module.exports = function() {
 			    return [200, angular.toJson(data), {}];
 			});
 			$httpBackend.whenPOST('./SaveTask.json').respond(function(method, url, data){
-				var task;
+				var data = angular.fromJson(data),
+					task;
 
 			    if (data.Id){
 					angular.forEach(tasks, function(t, i){
@@ -104,7 +105,9 @@ module.exports = function() {
 					return [200, angular.toJson(task), {}];
 				} else {
 
-					if (!data.Text || !angular.isDate(data.DueTime)){
+					var regexIso8601 = /^(\d{4}|\+\d{6})(?:-(\d{2})(?:-(\d{2})(?:T(\d{2}):(\d{2})(:(\d{2})(\.(\d{1,}))?)?(Z|([\-+])(\d{2}):(\d{2}))?)?)?)?$/;
+
+					if (!data.Text || !regexIso8601.test(data.DueTime)){
 						return [500, {"error": "Bad request"}, {}]
 					}
 
