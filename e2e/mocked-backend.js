@@ -111,10 +111,10 @@ module.exports = function() {
 					task = {
 						Id: ++ count,
 						Text: data.Text,
-						IsFinished: false,
+						IsFinished: data.IsFinished || false,
 						CreateTime: new Date(),
 						DueTime: data.DueTime,
-						FinishTime: null
+						FinishTime: data.IsFinished ? new Date() : null
 					};
 
 					tasks.push(task);
