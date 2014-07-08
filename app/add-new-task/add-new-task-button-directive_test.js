@@ -9,11 +9,11 @@
 
 describe('add-new-task-button-directive', function(){
 	it('Отбражение окна по клику', function() {
-		element(by.css('.addNewTaskButton')).click();
-		expect(element(by.css('.taskWindowDirective')).isDisplayed()).toBe(true);
+		element(by.css('.addNewTaskButton i')).click();
+		expect(element(by.css('.taskWindow')).isDisplayed()).toBe(true);
 	});
 	it('Скрытие окна по второму клику', function() {
-		element(by.css('.addNewTaskButton')).click();
-		expect(element(by.css('.taskWindowDirective')).isDisplayed()).toBe(false);
+		element(by.css('.addNewTaskButton i')).click();
+		expect(element(by.css('.taskWindow')).isDisplayed()).toBe(false);
 	});
 });
