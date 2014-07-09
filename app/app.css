@@ -79,9 +79,11 @@ body {
   padding-top: 15px;
 }
 .topMenu {
-  border-bottom: 1px solid;
-  margin-bottom: 10px;
+  height: 90px;
   padding: 10px 0px;
+  background-color: #bfbfbf;
+  border-bottom: 1px solid #bcbcbc;
+  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
 }
 .topMenu .topMenu-search-container,
 .topMenu .topMenu-buttons-container {
