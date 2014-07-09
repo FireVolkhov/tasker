@@ -1,0 +1,73 @@
+.taskDirective{
+  & .task-isFinished-container{
+    float: left;
+    padding: 5px 20px 5px 10px;
+  }
+  & .task-text-dueTime-buttons-container{
+    overflow: hidden;
+  }
+
+  & .task-text{
+    font-size: 33.333px;
+    line-height: 1.125;
+  }
+  & .task-dueTime{
+    font-size: 20.833px;
+    line-height: 1.8
+  }
+
+  & .task-text textarea{
+    width: 100%;
+  }
+
+  & .task-buttons{
+    float: right;
+    font-size: 20.833px;
+  }
+
+  &.task-status-finished{
+    & .task-text{
+      color: @silver-color;
+    }
+    & .task-dueTime{
+      color: @green-color;
+    }
+  }
+  &.task-status-today .task-dueTime{
+    color: @blue-color;
+  }
+  &.task-status-later .task-dueTime{
+    color: @silver-color;
+  }
+  &.task-status-overdue .task-dueTime{
+    color: @red-color;
+  }
+
+  & .task-hideButton,
+  & .task-editButton,{
+    display: none;
+  }
+
+  &:hover .task-hideButton,
+  &:hover .task-editButton{
+    display: inline;
+  }
+
+  & i.task-icon{
+    .icon(@url){
+      display: block;
+      width: 25px;
+      height: 25px;
+      background: url(@url) center no-repeat;
+      background-size: cover;
+    }
+    &Check{
+      .icon("./icons/icon-check.png");
+      opacity: 0.3;
+    }
+    &UnCheck{
+      .icon("./icons/icon-uncheck.png");
+      opacity: 0.7;
+    }
+  }
+}

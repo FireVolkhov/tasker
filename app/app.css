@@ -8,34 +8,72 @@
 body {
   font-family: "PF DinDisplay Pro Light", Verdana, Arial, Helvetica, sans-serif;
 }
-.taskDirective > .task-isFinished-container {
+.taskDirective .task-isFinished-container {
   float: left;
-  padding: 5px;
+  padding: 5px 20px 5px 10px;
+}
+.taskDirective .task-text-dueTime-buttons-container {
+  overflow: hidden;
+}
+.taskDirective .task-text {
+  font-size: 33.333px;
+  line-height: 1.125;
+}
+.taskDirective .task-dueTime {
+  font-size: 20.833px;
+  line-height: 1.8;
+}
+.taskDirective .task-text textarea {
+  width: 100%;
+}
+.taskDirective .task-buttons {
+  float: right;
+  font-size: 20.833px;
 }
 .taskDirective.task-status-finished .task-text {
-  color: #c0c0c0;
+  color: #a8a8a8;
 }
-.taskDirective.task-status-finished .task-dueTime span {
-  color: #008000;
+.taskDirective.task-status-finished .task-dueTime {
+  color: #9ec54d;
 }
-.taskDirective.task-status-today .task-dueTime span {
-  color: #0000ff;
+.taskDirective.task-status-today .task-dueTime {
+  color: #61acec;
 }
-.taskDirective.task-status-later .task-dueTime span {
-  color: #c0c0c0;
+.taskDirective.task-status-later .task-dueTime {
+  color: #a8a8a8;
 }
-.taskDirective.task-status-overdue .task-dueTime span {
-  color: #ff0000;
+.taskDirective.task-status-overdue .task-dueTime {
+  color: #e55c9a;
 }
-.taskDirective .task-hideButton {
-  text-align: right;
+.taskDirective .task-hideButton,
+.taskDirective .task-editButton {
   display: none;
 }
-.taskDirective:hover .task-hideButton {
+.taskDirective:hover .task-hideButton,
+.taskDirective:hover .task-editButton {
   display: inline;
+}
+.taskDirective i.task-iconCheck {
+  display: block;
+  width: 25px;
+  height: 25px;
+  background: url("components/task/task-directive/icons/icon-check.png") center no-repeat;
+  background-size: cover;
+  opacity: 0.3;
+}
+.taskDirective i.task-iconUnCheck {
+  display: block;
+  width: 25px;
+  height: 25px;
+  background: url("components/task/task-directive/icons/icon-uncheck.png") center no-repeat;
+  background-size: cover;
+  opacity: 0.7;
 }
 .tasksList > .taskList-nowTime {
   text-align: right;
+}
+.tasksList .taskDirective {
+  padding-top: 15px;
 }
 .topMenu {
   border-bottom: 1px solid;
