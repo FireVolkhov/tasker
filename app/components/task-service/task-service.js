@@ -18,7 +18,10 @@ angular.module('task-service', [])
 		var Task,
 			today = new Date(),
 			tasks = [],
-			cached = false;
+			cached = false,
+			events = {
+				eventsNames: ["change", "save"]
+			};
 
 		Task = function(value){
 			// Убираем лишние переменные
@@ -87,6 +90,10 @@ angular.module('task-service', [])
 						});
 
 						return tasks;
+					})
+					.then(function(tasks){
+						Task.fireEventChange(tasks);
+					    return tasks;
 					});
 
 				cached = true;
@@ -121,6 +128,11 @@ angular.module('task-service', [])
 				    angular.extend(task, transformServerData(result.data));
 					task.$edit = false;
 					task.$hide = false;
+					return task;
+				})
+				.then(function(task){
+					Task.fireEventChange(task);
+				    Task.fireEventSave(task);
 					return task;
 				});
 
@@ -182,6 +194,31 @@ angular.module('task-service', [])
 		Task.getNowTime = Task.prototype.$getNowTime;
 		Task.getAll = Task.prototype.$getAll;
 		Task.updateAll = Task.prototype.$updateAll;
+
+		angular.forEach(events.eventsNames, function(event){
+			var upperCaseName = event[0].toUpperCase() + event.slice(1);
+			events[event] = [];
+
+		    Task["onEvent" + upperCaseName] = function(listener){
+		        if (angular.isFunction(listener)){
+					events[event].push(listener);
+				}
+		    };
+
+			Task["removeEvent" + upperCaseName] = function(listener){
+			    var i = events[event].instanceOf(listener);
+				if (i > -1){
+					events[event].splice(i, 1);
+				}
+			};
+
+			Task["fireEvent" + upperCaseName] = function(){
+				var arg = arguments;
+			    angular.forEach(events[event], function(listener){
+			        listener.apply(listener, arg);
+			    });
+			};
+		});
 
 		return Task;
 	}])

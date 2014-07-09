@@ -30,14 +30,6 @@ angular.module('task-directive', ['template/components/task/task-directive.html'
 						}
 					}
 				};
-
-				scope.$watch('task', function(){
-					if (scope.task){
-						scope.task.$isValid = function(){
-							return scope.form.$valid;
-						}
-					}
-				});
 			}
 		};
 	}])
@@ -56,8 +48,13 @@ angular.module('template/components/task/task-directive.html', []).run(['$templa
 			'		</div>' +
 			'		<div class="task-dueTime">' +
 			'			<span ng-if="!task.$edit">{{ task.DueTime | date: \'dd.MM.yyyy H:mm\' }}</span>' +
-			'			<button ng-if="!task.$edit" class="task-hideButton" ng-click="task.$hide = !task.$hide">скрыть</button>' +
 			'			<input ng-if="task.$edit" type="datetime-local" data-ng-model="task.DueTime" required>' +
+			'		</div>' +
+			'		<div class="task-buttons">' +
+			'			<button ng-if="!task.$edit" class="task-hideButton" ng-click="task.$hide = !task.$hide">Скрыть</button>' +
+			'			<button ng-if="!task.$edit" class="task-editButton" ng-click="task.$edit = true">Редактировать</button>' +
+			'			<button ng-if="task.$edit" class="task-cancelButton" ng-click="task.$edit = false">Отмена</button>' +
+			'			<button ng-if="task.$edit" class="task-saveButton" ng-click="task.$save()" ng-disabled="!task.$resolved || form.$invalid">Сохранить</button>' +
 			'		</div>' +
 			'	</div>' +
 			'</div>'
