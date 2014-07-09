@@ -1,0 +1,82 @@
+.search{
+  @color-background: #E8E8E8;
+  @color-background-focus: #ffffff;
+  @color-active-background: #4260c2;
+  @color-active-text: #ffffff;
+
+  & > .form-control{
+    font-size: @font-size-lg;
+    color: @black-color;
+    line-height: 1.125;
+    height: auto;
+    padding-left: 56px;
+    border-radius: @border-radius;
+    background: url("./icon-search.png") no-repeat;
+    background-color: @color-background;
+    background-position: 10px;
+
+    &:focus,
+    &:active{
+      background-color: @color-background-focus;
+    }
+  }
+
+  & > .dropdown-menu{
+    margin-top: @triangle-size;
+    border-radius: @border-radius;
+    padding: (@border-radius + 5px);
+
+    .dropdown-menu-triangle(@triangle-size, 56px - @triangle-size/2);
+
+    & > .search-scroll{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      height: 200px;
+      overflow-y: scroll;
+
+      & > *{
+        padding: 10px 0;
+        &:not(:last-child){
+          border-bottom: 1px solid;
+        }
+
+        &.active{
+          & .searchTaskTypeahead-text{
+            color: @color-active-text;
+          }
+          background-color: @color-active-background;
+        }
+      }
+    }
+  }
+}
+
+.searchTaskTypeahead{
+  padding: 0 5px;
+
+  & .searchTaskTypeahead-text{
+    font-size: @font-size-md;
+  }
+  & .searchTaskTypeahead-dueTime{
+    font-size: @font-size-xs;
+  }
+
+  &.searchTaskTypeahead-status-finished{
+    & .searchTaskTypeahead-text{
+      color: @silver-color;
+    }
+    & .searchTaskTypeahead-dueTime{
+      color: @green-color;
+    }
+  }
+  &.searchTaskTypeahead-status-today .searchTaskTypeahead-dueTime{
+    color: @blue-color;
+  }
+  &.searchTaskTypeahead-status-later .searchTaskTypeahead-dueTime{
+    color: @silver-color;
+  }
+  &.searchTaskTypeahead-status-overdue .searchTaskTypeahead-dueTime{
+    color: @red-color;
+  }
+}

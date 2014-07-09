@@ -6,10 +6,38 @@
 
 @font-size-lg: 33.333px;
 @font-size-md: 20.833px;
-@font-size-sm: 16.667px;;
+@font-size-sm: 16.667px;
+@font-size-xs: 12.5px;
 
 @main-font: "PF DinDisplay Pro Light";
 @font-dir: "./fonts/";
+
+@border-radius: 10px;
+@triangle-size: 25px;
+
+.dropdown-menu-triangle(@size, @left){
+  &::before {
+    position: absolute;
+    top: -@size;
+    left: @left;
+    display: inline-block;
+    border-right: @size solid transparent;
+    border-bottom: @size solid #CCC;
+    border-left: @size solid transparent;
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+    content: '';
+  }
+  &::after {
+    position: absolute;
+    top: -@size + 1px;
+    left: @left + 1px;
+    display: inline-block;
+    border-right: (@size - 1px) solid transparent;
+    border-bottom: (@size - 1px) solid white;
+    border-left: (@size - 1px) solid transparent;
+    content: '';
+  }
+}
 
 @font-face {
   font-family: @main-font;
@@ -29,3 +57,4 @@ body{
 @import "components/task/task";
 @import "tasks-list/tasks-list";
 @import "top-menu/top-menu";
+@import "search/search";

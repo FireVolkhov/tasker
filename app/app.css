@@ -80,7 +80,7 @@ body {
 }
 .topMenu {
   height: 90px;
-  padding: 10px 0px;
+  padding: 17px 0px;
   background-color: #bfbfbf;
   border-bottom: 1px solid #bcbcbc;
   box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
@@ -95,4 +95,91 @@ body {
 .topMenu .topMenu-buttons-container {
   width: 29%;
   text-align: right;
+}
+.search > .form-control {
+  font-size: 33.333px;
+  color: #373737;
+  line-height: 1.125;
+  height: auto;
+  padding-left: 56px;
+  border-radius: 10px;
+  background: url("search/search-directive/icon-search.png") no-repeat;
+  background-color: #e8e8e8;
+  background-position: 10px;
+}
+.search > .form-control:focus,
+.search > .form-control:active {
+  background-color: #ffffff;
+}
+.search > .dropdown-menu {
+  margin-top: 25px;
+  border-radius: 10px;
+  padding: 15px;
+}
+.search > .dropdown-menu::before {
+  position: absolute;
+  top: -25px;
+  left: 43.5px;
+  display: inline-block;
+  border-right: 25px solid transparent;
+  border-bottom: 25px solid #cccccc;
+  border-left: 25px solid transparent;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  content: '';
+}
+.search > .dropdown-menu::after {
+  position: absolute;
+  top: -24px;
+  left: 44.5px;
+  display: inline-block;
+  border-right: 24px solid transparent;
+  border-bottom: 24px solid #ffffff;
+  border-left: 24px solid transparent;
+  content: '';
+}
+.search > .dropdown-menu > .search-scroll {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  height: 200px;
+  overflow-y: scroll;
+}
+.search > .dropdown-menu > .search-scroll > * {
+  padding: 10px 0;
+}
+.search > .dropdown-menu > .search-scroll > *:not(:last-child) {
+  border-bottom: 1px solid;
+}
+.search > .dropdown-menu > .search-scroll > *.active {
+  background-color: #4260c2;
+}
+.search > .dropdown-menu > .search-scroll > *.active .searchTaskTypeahead-text {
+  color: #ffffff;
+}
+.searchTaskTypeahead {
+  padding: 0 5px;
+}
+.searchTaskTypeahead .searchTaskTypeahead-text {
+  font-size: 20.833px;
+}
+.searchTaskTypeahead .searchTaskTypeahead-dueTime {
+  font-size: 12.5px;
+}
+.searchTaskTypeahead.searchTaskTypeahead-status-finished .searchTaskTypeahead-text {
+  color: #a8a8a8;
+}
+.searchTaskTypeahead.searchTaskTypeahead-status-finished .searchTaskTypeahead-dueTime {
+  color: #9ec54d;
+}
+.searchTaskTypeahead.searchTaskTypeahead-status-today .searchTaskTypeahead-dueTime {
+  color: #61acec;
+}
+.searchTaskTypeahead.searchTaskTypeahead-status-later .searchTaskTypeahead-dueTime {
+  color: #a8a8a8;
+}
+.searchTaskTypeahead.searchTaskTypeahead-status-overdue .searchTaskTypeahead-dueTime {
+  color: #e55c9a;
+}
+.typeaheadUnderline {
+  text-decoration: underline;
 }
