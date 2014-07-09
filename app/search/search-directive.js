@@ -14,6 +14,11 @@ angular.module('search-directive', ['template/search/search-directive.html', 'te
 			templateUrl: "template/search/search-directive.html",
 			link: function(scope, elem, attrs){
 				scope.tasks = Task.getAll();
+				scope.openWindow = function($item, $model, $label){
+				    scope.task = null;
+					$model.$edit = true;
+					$model.$hide = false;
+				};
 			}
 		}
 	}])
@@ -25,7 +30,9 @@ angular.module('template/search/search-directive.html', []).run(['$templateCache
 			'	<input type="text" class="form-control"' +
 			'		data-ng-model="task"' +
 			'		typeahead="task as task.Text for task in tasks | filter:$viewValue"' +
-			'		typeahead-template-url="template/search/search-task-typeahead.html">' +
+			'		typeahead-template-url="template/search/search-task-typeahead.html"' +
+			'		typeahead-on-select="openWindow($item, $model, $label)"' +
+			'	>' +
 			'</div>'
 	);
 }]);

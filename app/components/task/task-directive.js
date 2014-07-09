@@ -7,7 +7,7 @@
  */
 "use strict";
 
-angular.module('task-directive', ['template/components/task/task-directive.html'])
+angular.module('task-directive', ['template/components/task/task-directive.html', 'focus-directive'])
 	.directive('task', [function(){
 		return {
 			scope: {
@@ -44,7 +44,7 @@ angular.module('template/components/task/task-directive.html', []).run(['$templa
 			'	<div>' +
 			'		<div class="task-text">' +
 			'			<span ng-if="!task.$edit" >{{ task.Text }}</span>' +
-			'			<textarea ng-if="task.$edit" data-ng-model="task.Text" required></textarea>' +
+			'			<textarea ng-if="task.$edit" data-ng-model="task.Text" focus required></textarea>' +
 			'		</div>' +
 			'		<div class="task-dueTime">' +
 			'			<span ng-if="!task.$edit">{{ task.DueTime | date: \'dd.MM.yyyy H:mm\' }}</span>' +
