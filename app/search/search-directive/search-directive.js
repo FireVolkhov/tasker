@@ -7,7 +7,7 @@
  */
 "use strict";
 
-angular.module('search-directive', ['template/search/search-directive.html', 'template/search/search-task-typeahead.html', 'task-service', 'ui.bootstrap', 'typeahead-underline'])
+angular.module('search-directive', ['template/search/search-directive.html', 'template/search/search-task-typeahead.html', 'task-service', 'ui.bootstrap', 'typeahead-underline-filler'])
 	.directive('search', ['Task', function(Task){
 		return {
 			replace: true,

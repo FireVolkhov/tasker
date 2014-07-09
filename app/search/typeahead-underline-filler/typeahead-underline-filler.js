@@ -7,7 +7,7 @@
  */
 "use strict";
 
-angular.module('typeahead-underline', [])
+angular.module('typeahead-underline-filler', [])
 	.filter('typeaheadUnderline', [function() {
 
 		function escapeRegexp(queryToEscape) {
