@@ -7,7 +7,7 @@
  */
 "use strict";
 
-angular.module('task-directive', ['template/components/task/task-directive.html', 'focus-directive'])
+angular.module('task-directive', ['template/components/task/task-directive.html', 'focus-directive', 'datetime-local-directive'])
 	.directive('task', [function(){
 		return {
 			scope: {
@@ -55,7 +55,7 @@ angular.module('template/components/task/task-directive.html', []).run(['$templa
 			'				</div>' +
 			'			</div>' +
 			'			<div ng-if="task.$edit">' +
-			'				<input type="datetime-local" data-ng-model="task.DueTime" required>' +
+			'				<input type="datetime-local" data-ng-model="task.DueTime" required datetime-local>' +
 			'				<div class="task-buttons">' +
 			'					<button class="task-cancelButton" ng-click="task.$edit = false">Отмена</button>' +
 			'					<button class="task-saveButton" ng-click="task.$save()" ng-disabled="!task.$resolved || form.$invalid">Сохранить</button>' +

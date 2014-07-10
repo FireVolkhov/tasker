@@ -13,6 +13,6 @@ angular.module('focus-directive', [])
 			link: function(scope, elem, attrs){
 				elem[0].focus();
 			}
-		}
+		};
 	}])
 ;

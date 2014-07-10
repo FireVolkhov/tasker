@@ -26,18 +26,37 @@ describe('task-directive', function(){
 	});
 	it('Редактирование задачи', function(){
 		element.all(by.repeater('task in tasksCtrl.tasks')).each(function(elem){
-			ptor.actions().mouseMove(elem).perform();
-		    elem.findElement(by.css('.task-editButton')).click();
-			var textElem = elem.findElement(by.model('task.Text'));
-			var timeElem = elem.findElement(by.model('task.DueTime'));
-			textElem.clear();
-			textElem.sendKeys(task.Text);
-			timeElem.clear();
-			timeElem.sendKeys(task.DueTime);
-			elem.findElement(by.buttonText('Сохранить')).click();
+			var textElem,
+				timeElem;
 
-			expect(elem.findElement(by.model('task.Text')).getText()).toBe(task.Text);
-			expect(elem.findElement(by.model('task.DueTime')).getText()).toBe(task.DueTimeText);
+			protractor.promise.all([
+				elem.findElement(by.css('.task-text')).getText(),
+				elem.findElement(by.css('.task-dueTime')).getText()
+			]).then(function(result){
+				ptor.actions().mouseMove(elem).perform();
+
+				elem.findElement(by.css('.task-editButton')).click();
+				textElem = elem.findElement(by.model('task.Text'));
+				timeElem = elem.findElement(by.model('task.DueTime'));
+				textElem.clear();
+				textElem.sendKeys(task.Text);
+				timeElem.sendKeys(task.DueTime);
+				elem.findElement(by.buttonText('Сохранить')).click();
+
+				expect(elem.findElement(by.css('.task-text')).getText()).toBe(task.Text);
+				expect(elem.findElement(by.css('.task-dueTime')).getText()).toBe(task.DueTimeText);
+
+				ptor.actions().mouseMove(elem).perform();
+
+				elem.findElement(by.css('.task-editButton')).click();
+				textElem = elem.findElement(by.model('task.Text'));
+				timeElem = elem.findElement(by.model('task.DueTime'));
+				textElem.clear();
+				textElem.sendKeys(result[0]);
+				timeElem.sendKeys(result[1].replace(/(\d\d).(\d\d).(\d{4,4})\s(\d\d):(\d\d)/, '$1$2$3' + protractor.Key.RIGHT + '$4$5'));
+
+				elem.findElement(by.buttonText('Сохранить')).click();
+			});
 		});
 	});
 });
