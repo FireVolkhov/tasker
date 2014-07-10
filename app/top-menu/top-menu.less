@@ -2,6 +2,7 @@
   @background-color: #bfbfbf;
   @border-color: #bcbcbc;
   @shadow-color: rgba(0,0,0,0.1);
+  @search-width: 70%;
 
   height: @top-menu-height;
   padding: @top-menu-pading 0px;
@@ -17,10 +18,10 @@
   }
 
   & .topMenu-search-container{
-    width: 70%;
+    width: @search-width;
   }
   & .topMenu-buttons-container{
-    width: 29%;
+    width: (100% - @search-width - 1%);
     float: right;
     padding-right: 15px;
 

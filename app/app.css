@@ -8,6 +8,9 @@
 body {
   font-family: "PF DinDisplay Pro Light", Verdana, Arial, Helvetica, sans-serif;
 }
+[ng-click]:not(:disabled):not(.disabled) {
+  cursor: pointer;
+}
 .taskDirective .task-isFinished-container {
   float: left;
   padding: 5px 20px 5px 10px;
@@ -23,6 +26,9 @@ body {
   font-size: 20.833px;
   line-height: 1.8;
 }
+.taskDirective input.task-dueTime {
+  line-height: 1.3;
+}
 .taskDirective .task-text textarea {
   width: 100%;
 }
@@ -30,19 +36,19 @@ body {
   float: right;
   font-size: 20.833px;
 }
-.taskDirective.task-status-finished .task-text {
+.taskDirective.task-status-finished .task-text span {
   color: #a8a8a8;
 }
-.taskDirective.task-status-finished .task-dueTime {
+.taskDirective.task-status-finished span.task-dueTime {
   color: #9ec54d;
 }
-.taskDirective.task-status-today .task-dueTime {
+.taskDirective.task-status-today span.task-dueTime {
   color: #61acec;
 }
-.taskDirective.task-status-later .task-dueTime {
+.taskDirective.task-status-later span.task-dueTime {
   color: #a8a8a8;
 }
-.taskDirective.task-status-overdue .task-dueTime {
+.taskDirective.task-status-overdue span.task-dueTime {
   color: #e55c9a;
 }
 .taskDirective .task-hideButton,
@@ -69,14 +75,29 @@ body {
   background-size: cover;
   opacity: 0.7;
 }
+.taskDirective .ng-invalid:not(.ng-pristine),
+.taskDirective .ng-invalid:focus {
+  border: 1px solid #e55c9a;
+  -webkit-box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.075);
+  outline: none;
+}
+.taskDirective .ng-valid:not(.ng-pristine),
+.taskDirective .ng-valid:focus {
+  border: 1px solid #9ec54d;
+  -webkit-box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.075);
+  outline: none;
+}
 .taskWindow {
-  left: auto;
-  width: 95%;
   max-width: 600px;
-  margin-right: -20px;
+  min-width: 300px;
   margin-top: 25px;
   border-radius: 10px;
   padding: 15px;
+  left: auto;
+  width: 95%;
+  margin-right: -20px;
 }
 .taskWindow::before {
   position: absolute;
@@ -98,15 +119,15 @@ body {
   content: '';
 }
 .taskWindow::before {
-  right: 12px;
+  right: 11px;
 }
 .taskWindow::after {
-  right: 13px;
+  right: 12px;
 }
 .search > .form-control {
   font-size: 33.333px;
-  color: #373737;
   line-height: 1.125;
+  color: #373737;
   height: auto;
   padding-left: 56px;
   border-radius: 10px;
@@ -119,6 +140,8 @@ body {
   background-color: #ffffff;
 }
 .search > .dropdown-menu {
+  max-width: 600px;
+  min-width: 300px;
   margin-top: 25px;
   border-radius: 10px;
   padding: 15px;
@@ -143,10 +166,10 @@ body {
   content: '';
 }
 .search > .dropdown-menu::before {
-  left: 43.5px;
+  left: 37.6666px;
 }
 .search > .dropdown-menu::after {
-  left: 44.5px;
+  left: 38.6666px;
 }
 .search > .dropdown-menu > .search-scroll {
   list-style: none;
@@ -159,7 +182,7 @@ body {
   padding: 10px 0;
 }
 .search > .dropdown-menu > .search-scroll > *:not(:last-child) {
-  border-bottom: 1px solid;
+  border-bottom: 1px solid #a8a8a8;
 }
 .search > .dropdown-menu > .search-scroll > *.active {
   background-color: #4260c2;
@@ -207,10 +230,10 @@ body {
   display: none;
 }
 .tasksList .taskList-nowTime {
-  text-align: right;
   font-size: 16.667px;
-  color: #373737;
   line-height: 2.25;
+  color: #373737;
+  text-align: right;
 }
 .tasksList .taskDirective {
   padding-top: 15px;

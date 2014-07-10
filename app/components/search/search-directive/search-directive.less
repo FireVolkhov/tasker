@@ -4,16 +4,18 @@
   @color-active-background: #4260c2;
   @color-active-text: #ffffff;
 
+  @offset-for-icon: 56px;
+  @offset-icon: 10px;
+
   & > .form-control{
-    font-size: @font-size-lg;
+    .font-lg();
     color: @black-color;
-    line-height: 1.125;
     height: auto;
-    padding-left: 56px;
+    padding-left: @offset-for-icon;
     border-radius: @border-radius;
     background: url("icon-search.png") no-repeat;
     background-color: @color-background;
-    background-position: 10px;
+    background-position: @offset-icon;
 
     &:focus,
     &:active{
@@ -22,11 +24,8 @@
   }
 
   & > .dropdown-menu{
-    margin-top: @triangle-size;
-    border-radius: @border-radius;
-    padding: (@border-radius + 5px);
-
-    .dropdown-menu-triangle-left(@triangle-size, 56px - @triangle-size/2);
+    .dropdown-menu();
+    .dropdown-menu-triangle-left(@triangle-size, @offset-for-icon - @triangle-size + @font-size-lg/5);
 
     & > .search-scroll{
       list-style: none;
@@ -38,7 +37,7 @@
       & > *{
         padding: 10px 0;
         &:not(:last-child){
-          border-bottom: 1px solid;
+          border-bottom: 1px solid @silver-color;
         }
 
         &.active{

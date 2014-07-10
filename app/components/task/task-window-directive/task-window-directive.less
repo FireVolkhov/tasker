@@ -1,11 +1,10 @@
 .taskWindow{
+  @offset-right: 20px;
+  @icon-size: @top-menu-icon-size;
+
+  .dropdown-menu();
+  .dropdown-menu-triangle-right(@triangle-size, @offset-right + @icon-size/2 - @triangle-size);
   left: auto;
   width: 95%;
-  max-width: 600px;
-  margin-right: -20px;
-  margin-top: @triangle-size;
-  border-radius: @border-radius;
-  padding: (@border-radius + 5px);
-
-  .dropdown-menu-triangle-right(@triangle-size, 12px);
+  margin-right: -@offset-right;
 }
