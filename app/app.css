@@ -69,6 +69,40 @@ body {
   background-size: cover;
   opacity: 0.7;
 }
+.taskWindow {
+  left: auto;
+  width: 95%;
+  max-width: 600px;
+  margin-right: -20px;
+  margin-top: 25px;
+  border-radius: 10px;
+  padding: 15px;
+}
+.taskWindow::before {
+  position: absolute;
+  top: -25px;
+  display: inline-block;
+  border-right: 25px solid transparent;
+  border-bottom: 25px solid #cccccc;
+  border-left: 25px solid transparent;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  content: '';
+}
+.taskWindow::after {
+  position: absolute;
+  top: -24px;
+  display: inline-block;
+  border-right: 24px solid transparent;
+  border-bottom: 24px solid #ffffff;
+  border-left: 24px solid transparent;
+  content: '';
+}
+.taskWindow::before {
+  right: 12px;
+}
+.taskWindow::after {
+  right: 13px;
+}
 .tasksList .taskList-nowTime {
   text-align: right;
   font-size: 16.667px;
@@ -94,7 +128,12 @@ body {
 }
 .topMenu .topMenu-buttons-container {
   width: 29%;
-  text-align: right;
+  float: right;
+  padding-right: 15px;
+}
+.topMenu .topMenu-buttons-container > * {
+  display: inline-block;
+  float: right;
 }
 .search > .form-control {
   font-size: 33.333px;
@@ -119,7 +158,6 @@ body {
 .search > .dropdown-menu::before {
   position: absolute;
   top: -25px;
-  left: 43.5px;
   display: inline-block;
   border-right: 25px solid transparent;
   border-bottom: 25px solid #cccccc;
@@ -130,12 +168,17 @@ body {
 .search > .dropdown-menu::after {
   position: absolute;
   top: -24px;
-  left: 44.5px;
   display: inline-block;
   border-right: 24px solid transparent;
   border-bottom: 24px solid #ffffff;
   border-left: 24px solid transparent;
   content: '';
+}
+.search > .dropdown-menu::before {
+  left: 43.5px;
+}
+.search > .dropdown-menu::after {
+  left: 44.5px;
 }
 .search > .dropdown-menu > .search-scroll {
   list-style: none;
@@ -182,4 +225,16 @@ body {
 }
 .typeaheadUnderline {
   text-decoration: underline;
+}
+.addNewTaskButton > .addNewTaskButton-iconPlus {
+  display: block;
+  width: 32px;
+  height: 32px;
+  background: url("add-new-task/icon-plus.png") center no-repeat;
+  background-size: cover;
+  margin: 12px 0px;
+  opacity: 0.37;
+}
+.addNewTaskButton > .taskWindow .task-cancelButton {
+  display: none;
 }

@@ -10,11 +10,11 @@
 describe('task-directive', function(){
 	it('Изменение статуса задачи', function() {
 		element.all(by.repeater('task in tasksCtrl.tasks')).each(function(elem){
-			elem.findElement(by.model('task.IsFinished')).click();
+			elem.findElement(by.css('[ng-click="finished()"]')).click();
 		});
 
 		element.all(by.repeater('task in tasksCtrl.tasks')).each(function(elem){
-			expect(elem.findElement(by.model('task.IsFinished')).getAttribute('checked')).toBe('true');
+			expect(elem.getAttribute('class')).toContain('task-status-finished');
 		});
 	});
 });

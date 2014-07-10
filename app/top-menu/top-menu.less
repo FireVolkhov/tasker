@@ -3,8 +3,8 @@
   @border-color: #bcbcbc;
   @shadow-color: rgba(0,0,0,0.1);
 
-  height: 90px;
-  padding: 17px 0px;
+  height: @top-menu-height;
+  padding: @top-menu-pading 0px;
 
   background-color: @background-color;
   border-bottom: 1px solid @border-color;
@@ -21,6 +21,12 @@
   }
   & .topMenu-buttons-container{
     width: 29%;
-    text-align: right;
+    float: right;
+    padding-right: 15px;
+
+    & > *{
+      display: inline-block;
+      float: right;
+    }
   }
 }

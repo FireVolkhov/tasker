@@ -14,12 +14,13 @@
 
 @border-radius: 10px;
 @triangle-size: 25px;
+@top-menu-height: 90px;
+@top-menu-pading: 17px;
 
-.dropdown-menu-triangle(@size, @left){
+.dropdown-menu-triangle(@size){
   &::before {
     position: absolute;
     top: -@size;
-    left: @left;
     display: inline-block;
     border-right: @size solid transparent;
     border-bottom: @size solid #CCC;
@@ -30,12 +31,30 @@
   &::after {
     position: absolute;
     top: -@size + 1px;
-    left: @left + 1px;
     display: inline-block;
     border-right: (@size - 1px) solid transparent;
     border-bottom: (@size - 1px) solid white;
     border-left: (@size - 1px) solid transparent;
     content: '';
+  }
+}
+
+.dropdown-menu-triangle-left(@size, @left){
+  .dropdown-menu-triangle(@size);
+  &::before{
+    left: @left;
+  }
+  &::after{
+    left: @left + 1px;
+  }
+}
+.dropdown-menu-triangle-right(@size, @right){
+  .dropdown-menu-triangle(@size);
+  &::before{
+    right: @right;
+  }
+  &::after{
+    right: @right + 1px;
   }
 }
 
@@ -58,3 +77,4 @@ body{
 @import "tasks-list/tasks-list";
 @import "top-menu/top-menu";
 @import "search/search";
+@import "add-new-task/add-new-task-button-directive";

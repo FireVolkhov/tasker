@@ -12,6 +12,7 @@ angular.module('task-window-directive', ['template/components/task/task-window-d
 		return {
 			scope: {
 				task: "=?taskWindow",
+				position: "=?",
 				open: "=?"
 			},
 			replace: true,
@@ -38,7 +39,7 @@ angular.module('task-window-directive', ['template/components/task/task-window-d
 
 angular.module('template/components/task/task-window-directive.html', []).run(['$templateCache', function($templateCache) {
 	$templateCache.put('template/components/task/task-window-directive.html',
-			'<div class="taskWindow" ng-show="open">' +
+			'<div class="taskWindow dropdown-menu" ng-style="{display: open&&\'block\' || \'none\', top: position.top+\'px\', right: position.right+\'px\'}">' +
 			'	<div task="task"></div>' +
 			'</div>'
 	);
