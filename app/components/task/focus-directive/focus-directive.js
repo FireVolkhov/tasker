@@ -10,6 +10,7 @@
 angular.module('focus-directive', [])
 	.directive('focus', [function(){
 		return {
+			restrict: 'A',
 			link: function(scope, elem, attrs){
 				elem[0].focus();
 			}
