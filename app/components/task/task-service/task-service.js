@@ -117,8 +117,14 @@ angular.module('task-service', [])
 				.then(checkError)
 				// Велосипед для тестов через json файлы
 				.then(function(result){
+					var maxId = 0;
+
 				    if (!result.data || !result.data.Text){
-						result.data = angular.fromJson(angular.toJson(task));
+						result.data = angular.copy(task);
+						angular.forEach(tasks, function(task){
+						    maxId = task.Id > maxId ? task.Id : maxId;
+						});
+						result.data.Id = ++ maxId;
 					}
 					return result;
 				})
