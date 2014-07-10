@@ -16,6 +16,8 @@ angular.module('task-directive', ['template/components/task/task-directive.html'
 			replace: true,
 			templateUrl: 'template/components/task/task-directive.html',
 			link: function(scope, elem, attrs){
+				var oldTask;
+
 				scope.finished = function(){
 					var task = scope.task;
 					
@@ -29,6 +31,26 @@ angular.module('task-directive', ['template/components/task/task-directive.html'
 							});
 						}
 					}
+				};
+
+				scope.$watch('task.$edit', function($edit){
+				    if ($edit){
+						oldTask = scope.task;
+						scope.task = angular.copy(oldTask);
+					}
+				});
+
+				scope.cancel = function(){
+				    scope.task = oldTask;
+					scope.task.$edit = false;
+				};
+
+				scope.save = function(){
+					angular.extend(oldTask, scope.task);
+					scope.task = oldTask;
+				    scope.task.$save().$promise.then(function(){
+				        scope.task.$edit = false;
+				    });
 				};
 			}
 		};
@@ -55,10 +77,10 @@ angular.module('template/components/task/task-directive.html', []).run(['$templa
 			'				</div>' +
 			'			</div>' +
 			'			<div ng-if="task.$edit">' +
-			'				<input type="datetime-local" data-ng-model="task.DueTime" required datetime-local>' +
+			'				<input class="task-dueTime" type="datetime-local" data-ng-model="task.DueTime" required datetime-local>' +
 			'				<div class="task-buttons">' +
-			'					<button class="task-cancelButton" ng-click="task.$edit = false">Отмена</button>' +
-			'					<button class="task-saveButton" ng-click="task.$save()" ng-disabled="!task.$resolved || form.$invalid">Сохранить</button>' +
+			'					<button class="task-cancelButton" ng-click="cancel()">Отмена</button>' +
+			'					<button class="task-saveButton" ng-click="save()" ng-disabled="!task.$resolved || form.$invalid">Сохранить</button>' +
 			'				</div>' +
 			'			</div>' +
 			'		</div>' +
