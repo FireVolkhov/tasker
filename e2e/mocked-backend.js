@@ -97,6 +97,7 @@ module.exports = function() {
 					}
 
 					task.Text = data.Text;
+					task.DueTime = data.DueTime;
 					if (!task.IsFinished && data.IsFinished) {
 						task.IsFinished = true;
 						task.FinishTime = new Date();
