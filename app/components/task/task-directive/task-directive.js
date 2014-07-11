@@ -7,8 +7,8 @@
  */
 "use strict";
 
-angular.module('task-directive', ['template/components/task/task-directive.html', 'focus-directive', 'datetime-local-directive'])
-	.directive('task', [function(){
+angular.module('task-directive', ['template/components/task/task-directive.html', 'focus-directive', 'datetime-local-directive', 'task-service'])
+	.directive('task', ['Task', function(Task){
 		return {
 			scope: {
 				task: "="

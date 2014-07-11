@@ -229,6 +229,28 @@ body {
 .addNewTaskButton > .taskWindow .task-cancelButton {
   display: none;
 }
+.statistic {
+  text-align: center;
+}
+.statistic > .statistic-percent {
+  font-size: 33.333px;
+  line-height: 1.125;
+}
+.statistic > .statistic-percent .statistic-percent-finished {
+  color: #9ec54d;
+}
+.statistic > .statistic-percent .statistic-percent-today {
+  color: #61acec;
+}
+.statistic > .statistic-percent .statistic-percent-overdue {
+  color: #e55c9a;
+}
+.statistic > .statistic-percent .statistic-percent-later {
+  color: #a8a8a8;
+}
+.statistic > .statistic-percent td {
+  padding: 0 5px;
+}
 .tasksList .taskList-nowTime {
   font-size: 16.667px;
   line-height: 2.25;

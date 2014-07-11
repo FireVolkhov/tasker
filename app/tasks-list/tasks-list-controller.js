@@ -7,7 +7,7 @@
  */
 "use strict";
 
-angular.module('taskList', ['task-service', 'task-directive'])
+angular.module('taskList', ['task-service', 'task-directive', 'statistic-directive'])
 	.controller('taskListController', ['Task', function(Task){
 		this.nowTime = Task.getNowTime();
 		this.tasks = Task.getAll();
