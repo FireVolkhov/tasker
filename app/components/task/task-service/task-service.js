@@ -14,11 +14,15 @@ angular.module('task-service', [])
 		LATER: "later",
 		OVERDUE: "overdue"
 	})
-	.factory('Task', ['$http', '$q', 'TASK_STATUS', function($http, $q, TASK_STATUS){
+	.factory('Task', ['$http', '$q', '$rootScope', 'TASK_STATUS', function($http, $q, $rootScope, TASK_STATUS){
 		var Task,
-			today = new Date(),
 			tasks = [],
 			cached = false,
+
+			today = new Date(),
+			timer,
+			TIMER_INTERVAL = 1000 * 60,
+
 			events = {},
 			addEventListener, removeEventListener, fireEvent;
 
@@ -55,17 +59,8 @@ angular.module('task-service', [])
 		 * @returns {Date}
 		 */
 		function getNowTime(){
-			if (cached){
-				return today;
-			} else {
-				var now = new Date();
-
-				getAll().$promise.finally(function(){
-				    now.setTime(today.getTime());
-				});
-
-				return now;
-			}
+			getAll();
+			return today;
 		}
 
 		/**
@@ -83,12 +78,11 @@ angular.module('task-service', [])
 					})
 					.then(checkError)
 					.then(function(result){
-
 						var data = result.data;
-						today = new Date(data.Today) || today;
+						today = extendDate(today, data.Today);
 
 						angular.forEach(data.Items, function(task){
-							task = new Task(transformServerData(task));
+							task = new Task(updateStatus(task));
 							tasks.push(task);
 						});
 
@@ -138,7 +132,7 @@ angular.module('task-service', [])
 				.then(function(result){
 					// Без Id значит создана новая задача добавляем в общий список
 					if (!task.Id && result.data.Id) tasks.push(task);
-				    angular.extend(task, transformServerData(result.data));
+				    angular.extend(task, updateStatus(result.data));
 					task.$edit = false;
 					task.$hide = false;
 					return task;
@@ -166,12 +160,12 @@ angular.module('task-service', [])
 		 * @param task
 		 * @returns {task}
 		 */
-		function transformServerData(task){
+		function updateStatus(task){
 			if (task.IsFinished){
 				task.$status = TASK_STATUS.FINISHED;
 			} else if (task.DueTime < today){
 				task.$status = TASK_STATUS.OVERDUE;
-			} else if (task.DueTime > today && clearHMSMs2timeStamp(task.DueTime) == clearHMSMs2timeStamp(today)){
+			} else if (task.DueTime >= today && clearHMSMs2timeStamp(task.DueTime) == clearHMSMs2timeStamp(today)){
 				task.$status = TASK_STATUS.TODAY;
 			} else {
 				task.$status = TASK_STATUS.LATER;
@@ -204,6 +198,42 @@ angular.module('task-service', [])
 			return result;
 		}
 
+		function extendDate(date, date2){
+			if(angular.isDate(date) && angular.isDate(date2) && date2.getTime()){
+				date.setTime(date2.getTime());
+			}
+		    return date;
+		}
+
+		/**
+		 * Обновляет время и статусы задач
+		 */
+		timer = function(){
+		    var oldTime = now(),
+				interval = TIMER_INTERVAL,
+
+			wait = function(){
+				today.setTime(today.getTime() + now() - oldTime);
+				oldTime = now();
+
+				angular.forEach(tasks, function(task){
+					updateStatus(task);
+				});
+
+				fireEvent('change', tasks);
+				$rootScope.$apply();
+
+				setTimeout(wait, interval);
+			};
+
+			setTimeout(wait, interval);
+
+			function now(){
+			    return new Date().getTime();
+			}
+		};
+		timer();
+
 		/**
 		 * Event manager
 		 */
@@ -227,6 +257,7 @@ angular.module('task-service', [])
 				listener.apply(listener, arg);
 			});
 		};
+
 
 		Task.getNowTime = Task.prototype.$getNowTime;
 		Task.getAll = Task.prototype.$getAll;
