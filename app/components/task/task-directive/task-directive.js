@@ -35,6 +35,7 @@ angular.module('task-directive', ['template/components/task/task-directive.html'
 
 				scope.$watch('task.$edit', function($edit){
 				    if ($edit){
+						// Сохраняем данные до редактирования для возрата при отмене
 						oldTask = scope.task;
 						scope.task = angular.copy(oldTask);
 					}

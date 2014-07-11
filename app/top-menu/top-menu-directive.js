@@ -26,7 +26,7 @@ angular.module('template/top-menu/top-menu.html', []).run(['$templateCache', fun
 			'		<div class="topMenu-buttons-container">' +
 			'			<div add-new-task-button></div>' +
 			'		</div>' +
-			'	</div><!-- /.container-fluid -->' +
+			'	</div>' +
 			'</nav>'
 	);
 }]);

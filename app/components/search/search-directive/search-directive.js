@@ -14,10 +14,10 @@ angular.module('search-directive', ['search-templates', 'task-service', 'ui.boot
 			templateUrl: "template/search/search-directive.html",
 			link: function(scope, elem, attrs){
 				scope.tasks = Task.getAll();
-				scope.openWindow = function($item, $model, $label){
+				scope.edit = function(task){
 				    scope.task = null;
-					$model.$edit = true;
-					$model.$hide = false;
+					task.$edit = true;
+					task.$hide = false;
 				};
 			}
 		}
@@ -33,7 +33,7 @@ angular.module('template/search/search-directive.html', []).run(['$templateCache
 			'		data-ng-model="task"' +
 			'		typeahead="task as task.Text for task in tasks | filter:$viewValue"' +
 			'		typeahead-template-url="template/search/search-task-typeahead.html"' +
-			'		typeahead-on-select="openWindow($item, $model, $label)">' +
+			'		typeahead-on-select="edit($model)">' +
 			'</div>'
 	);
 }]);

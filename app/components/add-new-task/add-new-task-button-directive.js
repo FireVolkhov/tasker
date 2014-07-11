@@ -28,6 +28,7 @@ angular.module('add-new-task-button-directive', ['template/add-new-task/add-new-
 					var target = angular.element(evt.target),
 						clickInDirective = false;
 
+					// Клик внутри директивы?
 					if (scope.open){
 						while(target[0] !== $document[0]){
 							if (elem[0] === target[0]) {

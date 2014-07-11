@@ -7,6 +7,9 @@
  */
 "use strict";
 
+/**
+ * Прокручивает скролл к элементу если его не видно
+ */
 angular.module('scroll-directive', [])
 	.directive('scroll', [function(){
 		return {

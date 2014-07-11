@@ -7,6 +7,9 @@
  */
 "use strict";
 
+/**
+ * Переводит строку с локальной датой в дату и обратно
+ */
 angular.module('datetime-local-directive', [])
 	.directive('datetimeLocal', ['$filter', function($filter){
 		return {
