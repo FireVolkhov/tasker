@@ -118,6 +118,8 @@ angular.module('task-service', [])
 				    task.$resolved = true;
 				})
 				.then(checkError)
+
+				//TODO: Удалить при запуске с сервером
 				// Велосипед для тестов через json файлы
 				.then(function(result){
 					var maxId = 0;
@@ -131,9 +133,11 @@ angular.module('task-service', [])
 					}
 					return result;
 				})
+
+
 				.then(function(result){
 					// Без Id значит создана новая задача добавляем в общий список
-					if (!task.Id) tasks.push(task);
+					if (!task.Id && result.data.Id) tasks.push(task);
 				    angular.extend(task, transformServerData(result.data));
 					task.$edit = false;
 					task.$hide = false;
@@ -218,7 +222,7 @@ angular.module('task-service', [])
 
 		fireEvent = function(event){
 			var arg = arguments;
-			arg = arg.slice(1);
+			arg = Array.prototype.slice.call(arg, 1);
 			angular.forEach(events[event], function(listener){
 				listener.apply(listener, arg);
 			});
