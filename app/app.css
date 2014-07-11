@@ -235,6 +235,7 @@ body {
 .statistic > .statistic-percent {
   font-size: 33.333px;
   line-height: 1.125;
+  text-align: right;
 }
 .statistic > .statistic-percent .statistic-percent-finished {
   color: #9ec54d;
