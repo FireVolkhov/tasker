@@ -19,6 +19,8 @@ angular.module('statistic-directive', ['template/components/statistic/statistic-
 
 				scope.slices = {};
 				scope.config = {
+					animateTime: 500,
+
 					width: 400,
 					height: 400,
 
