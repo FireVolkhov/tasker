@@ -84,9 +84,15 @@ module.exports = function() {
 			});
 			$httpBackend.whenPOST('./SaveTask.json').respond(function(method, url, data){
 				var data = angular.fromJson(data),
+					regexIso8601 = /^(\d{4}|\+\d{6})(?:-(\d{2})(?:-(\d{2})(?:T(\d{2}):(\d{2})(:(\d{2})(\.(\d{1,}))?)?(Z|([\-+])(\d{2}):(\d{2}))?)?)?)?$/,
 					task;
 
+				if (!data.Text || !regexIso8601.test(data.DueTime)){
+					return [500, {"error": "Bad request"}, {}];
+				}
+
 			    if (data.Id){
+					// Ищем задачу
 					angular.forEach(tasks, function(t, i){
 					    if (t.Id == data.Id){
 							task = t;
@@ -105,13 +111,7 @@ module.exports = function() {
 
 					return [200, angular.toJson(task), {}];
 				} else {
-
-					var regexIso8601 = /^(\d{4}|\+\d{6})(?:-(\d{2})(?:-(\d{2})(?:T(\d{2}):(\d{2})(:(\d{2})(\.(\d{1,}))?)?(Z|([\-+])(\d{2}):(\d{2}))?)?)?)?$/;
-
-					if (!data.Text || !regexIso8601.test(data.DueTime)){
-						return [500, {"error": "Bad request"}, {}]
-					}
-
+					// Делаем новую
 					task = {
 						Id: ++ count,
 						Text: data.Text,

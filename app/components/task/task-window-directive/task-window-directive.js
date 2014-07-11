@@ -22,7 +22,7 @@ angular.module('task-window-directive', ['template/components/task/task-window-d
 					scope.task = getNewTask();
 				}
 
-				Task.onEventSave(function(task){
+				Task.addEventListener('save', function(task){
 				    if (task == scope.task){
 						scope.open = false;
 						scope.task = getNewTask();
