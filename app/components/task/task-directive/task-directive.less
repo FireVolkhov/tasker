@@ -1,0 +1,93 @@
+.taskDirective{
+  @icon-size: @task-icon-size;
+
+  .icon(@url, @size){
+    display: block;
+    width: @size;
+    height: @size;
+    background: url(@url) center no-repeat;
+    background-size: cover;
+  }
+
+  .input-border(@color){
+    border: 1px solid @color;
+    -webkit-box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.075);
+    outline: none;
+  }
+
+  & .task-isFinished-container{
+    float: left;
+    padding: 5px 20px 5px 10px;
+  }
+  & .task-text-dueTime-buttons-container{
+    overflow: hidden;
+  }
+
+  & .task-text{
+    .font-lg();
+  }
+  & .task-dueTime{
+    .font-md();
+  }
+  & input.task-dueTime{
+    line-height: 1.3
+  }
+
+  & .task-text textarea{
+    width: 100%;
+  }
+
+  & .task-buttons{
+    float: right;
+    font-size: @font-size-md;
+  }
+
+  &.task-status-finished{
+    & .task-text span{
+      color: @silver-color;
+    }
+    & span.task-dueTime{
+      color: @green-color;
+    }
+  }
+  &.task-status-today span.task-dueTime{
+    color: @blue-color;
+  }
+  &.task-status-later span.task-dueTime{
+    color: @silver-color;
+  }
+  &.task-status-overdue span.task-dueTime{
+    color: @red-color;
+  }
+
+  & .task-hideButton,
+  & .task-editButton,{
+    display: none;
+  }
+
+  &:hover .task-hideButton,
+  &:hover .task-editButton{
+    display: inline;
+  }
+
+  & i.task-icon{
+    &Check{
+      .icon("./icons/icon-check.png", @icon-size);
+      opacity: 0.3;
+    }
+    &UnCheck{
+      .icon("./icons/icon-uncheck.png", @icon-size);
+      opacity: 0.7;
+    }
+  }
+
+  .ng-invalid:not(.ng-pristine),
+  .ng-invalid:focus{
+    .input-border(@red-color);
+  }
+  .ng-valid:not(.ng-pristine),
+  .ng-valid:focus {
+    .input-border(@green-color);
+  }
+}

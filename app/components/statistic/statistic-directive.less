@@ -1,0 +1,23 @@
+.statistic{
+  text-align: center;
+
+  & > .statistic-percent{
+    .font-lg();
+    text-align: right;
+    & .statistic-percent-finished{
+      color: @green-color;
+    }
+    & .statistic-percent-today{
+      color: @blue-color;
+    }
+    & .statistic-percent-overdue{
+      color: @red-color;
+    }
+    & .statistic-percent-later{
+      color: @silver-color;
+    }
+    & td{
+      padding: 0 5px;
+    }
+  }
+}

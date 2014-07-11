@@ -1,0 +1,24 @@
+.addNewTaskButton{
+  @icon-size: @top-menu-icon-size;
+  @icon-color: #5f5f5f;
+
+  .icon(@url, @size){
+    display: block;
+    width: @size;
+    height: @size;
+    background: url(@url) center no-repeat;
+    background-size: cover;
+  }
+
+  & > .addNewTaskButton-iconPlus{
+    .icon("./icon-plus.png", @icon-size);
+    margin: ((@top-menu-height - @top-menu-pading*2 - @icon-size)/2) 0px;
+    opacity: 0.37;
+  }
+
+  & > .taskWindow{
+    & .task-cancelButton{
+      display: none;
+    }
+  }
+}

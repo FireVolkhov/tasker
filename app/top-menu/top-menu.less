@@ -1,0 +1,33 @@
+.topMenu{
+  @background-color: #bfbfbf;
+  @border-color: #bcbcbc;
+  @shadow-color: rgba(0,0,0,0.1);
+  @search-width: 70%;
+
+  height: @top-menu-height;
+  padding: @top-menu-pading 0px;
+
+  background-color: @background-color;
+  border-bottom: 1px solid @border-color;
+
+  box-shadow: 0px 5px 5px 0px @shadow-color;
+
+  & .topMenu-search-container,
+  & .topMenu-buttons-container{
+    display: inline-block;
+  }
+
+  & .topMenu-search-container{
+    width: @search-width;
+  }
+  & .topMenu-buttons-container{
+    width: (100% - @search-width - 1%);
+    float: right;
+    padding-right: 15px;
+
+    & > *{
+      display: inline-block;
+      float: right;
+    }
+  }
+}

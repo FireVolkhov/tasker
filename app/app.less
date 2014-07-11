@@ -1,0 +1,117 @@
+@green-color: #9ec54d;
+@blue-color: #61acec;
+@silver-color: #a8a8a8;
+@red-color: #e55c9a;
+@black-color: #373737;
+
+@top-menu-icon-size: 32px;
+@task-icon-size: 25px;
+
+@font-size-lg: 33.333px;
+@font-size-md: 20.833px;
+@font-size-sm: 16.667px;
+@font-size-xs: 12.5px;
+
+@line-height-lg: 1.125;
+@line-height-md: 1.8;
+@line-height-sm: 2.25;
+
+.font-lg(){
+  font-size: @font-size-lg;
+  line-height: @line-height-lg;
+}
+.font-md(){
+  font-size: @font-size-md;
+  line-height: @line-height-md;
+}
+.font-sm(){
+  font-size: @font-size-sm;
+  line-height: @line-height-sm;
+}
+
+@main-font: "PF DinDisplay Pro Light";
+@font-dir: "./fonts/";
+
+@font-face {
+  font-family: @main-font;
+  src: url('@{font-dir}pfdindisplaypro-light-webfont.eot');
+  src: url('@{font-dir}pfdindisplaypro-light-webfont.eot?#iefix') format('embedded-opentype'),
+  url('@{font-dir}pfdindisplaypro-light-webfont.woff') format('woff'),
+  url('@{font-dir}pfdindisplaypro-light-webfont.ttf') format('truetype'),
+  url('@{font-dir}pfdindisplaypro-light-webfont.svg#pf_dindisplay_prolight') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body{
+  font-family: @main-font, Verdana, Arial, Helvetica, sans-serif;
+}
+
+
+@top-menu-height: 90px;
+@top-menu-pading: 17px;
+
+@dropdown-menu-max-width: 600px;
+@border-radius: 10px;
+@triangle-size: 25px;
+
+.dropdown-menu(){
+  max-width: @dropdown-menu-max-width;
+  min-width: @dropdown-menu-max-width/2;
+  margin-top: @triangle-size;
+  border-radius: @border-radius;
+  padding: (@border-radius + 5px);
+}
+
+// Триугольниги для дропдаун меню
+.dropdown-menu-triangle(@size){
+  &::before {
+    position: absolute;
+    top: -@size;
+    display: inline-block;
+    border-right: @size solid transparent;
+    border-bottom: @size solid #CCC;
+    border-left: @size solid transparent;
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+    content: '';
+  }
+  &::after {
+    position: absolute;
+    top: -@size + 1px;
+    display: inline-block;
+    border-right: (@size - 1px) solid transparent;
+    border-bottom: (@size - 1px) solid white;
+    border-left: (@size - 1px) solid transparent;
+    content: '';
+  }
+}
+
+.dropdown-menu-triangle-left(@size, @left){
+  .dropdown-menu-triangle(@size);
+  &::before{
+    left: @left;
+  }
+  &::after{
+    left: @left + 1px;
+  }
+}
+.dropdown-menu-triangle-right(@size, @right){
+  .dropdown-menu-triangle(@size);
+  &::before{
+    right: @right;
+  }
+  &::after{
+    right: @right + 1px;
+  }
+}
+
+[ng-click]:not(:disabled):not(.disabled){
+  cursor: pointer;
+}
+
+@import "components/task/task";
+@import "components/search/search";
+@import "components/add-new-task/add-new-task-button-directive";
+@import "components/statistic/statistic-directive";
+@import "tasks-list/tasks-list";
+@import "top-menu/top-menu";
