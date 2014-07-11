@@ -22,12 +22,18 @@ angular.module('task-window-directive', ['template/components/task/task-window-d
 					scope.task = getNewTask();
 				}
 
-				Task.addEventListener('save', function(task){
-				    if (task == scope.task){
+				Task.addEventListener('save', saveTaskListener);
+
+				scope.$on('destroy', function(){
+				   Task.removeEventListener('save', saveTaskListener);
+				});
+
+				function saveTaskListener(task){
+					if (task == scope.task){
 						scope.open = false;
 						scope.task = getNewTask();
 					}
-				});
+				}
 
 				function getNewTask(){
 					return new Task({$edit: true});
