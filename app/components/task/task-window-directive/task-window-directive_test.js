@@ -13,6 +13,11 @@ describe('task-window-directive', function(){
 			DueDate: "25032014",
 			DueTime: "1700"
 		},
+		task2 = {
+			Text: "Еще одна задача",
+			DueDate: "25032010",
+			DueTime: "1700"
+		},
 		elements = {
 			text: function(){
 				return element(by.css('.addNewTaskButton .taskWindow [data-ng-model="task.Text"]'));
@@ -49,6 +54,19 @@ describe('task-window-directive', function(){
 	});
 	it('Сохранение', function() {
 		elements.saveButton().click();
+		expect(elements.taskWindow().isDisplayed()).toBe(false);
+		expect(elements.taskList().getText()).toContain(task.Text);
+	});
+	it('Сохранение второй задачи', function(){
+		elements.addButton().click();
+		elements.text().sendKeys(task2.Text);
+		elements.dueTime().sendKeys(task2.DueDate, protractor.Key.RIGHT, task2.DueTime);
+		elements.saveButton().click();
+
+		expect(elements.taskWindow().isDisplayed()).toBe(false);
+		expect(elements.taskList().getText()).toContain(task2.Text);
+
+		// И первую проверяем
 		expect(elements.taskWindow().isDisplayed()).toBe(false);
 		expect(elements.taskList().getText()).toContain(task.Text);
 	});
