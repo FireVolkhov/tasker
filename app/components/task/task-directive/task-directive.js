@@ -11,7 +11,8 @@ angular.module('task-directive', ['template/components/task/task-directive.html'
 	.directive('task', ['Task', function(Task){
 		return {
 			scope: {
-				task: "="
+				task: "=",
+				notSaveOldTask: "=?"
 			},
 			replace: true,
 			templateUrl: 'template/components/task/task-directive.html',
@@ -34,7 +35,7 @@ angular.module('task-directive', ['template/components/task/task-directive.html'
 				};
 
 				scope.$watch('task.$edit', function($edit){
-				    if ($edit){
+				    if ($edit && !scope.notSaveOldTask){
 						// Сохраняем данные до редактирования для возрата при отмене
 						oldTask = scope.task;
 						scope.task = angular.copy(oldTask);
@@ -42,17 +43,29 @@ angular.module('task-directive', ['template/components/task/task-directive.html'
 				});
 
 				scope.cancel = function(){
-				    scope.task = oldTask;
+				    if (!scope.notSaveOldTask) scope.task = oldTask;
 					scope.task.$edit = false;
 				};
 
 				scope.save = function(){
-					angular.extend(oldTask, scope.task);
-					scope.task = oldTask;
+					if (!scope.notSaveOldTask){
+						angular.extend(oldTask, scope.task);
+						scope.task = oldTask;
+					}
 				    scope.task.$save().$promise.then(function(){
 				        scope.task.$edit = false;
+						scope.$emit('task-directive-save', scope.task);
 				    });
 				};
+
+				var removeListener = scope.$on('task-directive-newTask', function(event){
+				    scope.task = new Task({$edit: true});
+					event.stopPropagation();
+				});
+
+				scope.$on('destroy', function(){
+				    removeListener();
+				});
 			}
 		};
 	}])

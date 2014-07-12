@@ -18,22 +18,19 @@ angular.module('task-window-directive', ['template/components/task/task-window-d
 			replace: true,
 			templateUrl: "template/components/task/task-window-directive.html",
 			link: function(scope, elem, attrs){
+				var removeListener = scope.$on('task-directive-save', function(event, task){
+					scope.open = false;
+					scope.$broadcast('task-directive-newTask');
+					event.stopPropagation();
+				});
+
 			    if (!scope.task){
 					scope.task = getNewTask();
 				}
 
-				Task.addEventListener('save', saveTaskListener);
-
 				scope.$on('destroy', function(){
-				   Task.removeEventListener('save', saveTaskListener);
+					removeListener();
 				});
-
-				function saveTaskListener(task){
-					if (task == scope.task){
-						scope.open = false;
-						scope.task = getNewTask();
-					}
-				}
 
 				function getNewTask(){
 					return new Task({$edit: true});
@@ -46,7 +43,7 @@ angular.module('task-window-directive', ['template/components/task/task-window-d
 angular.module('template/components/task/task-window-directive.html', []).run(['$templateCache', function($templateCache) {
 	$templateCache.put('template/components/task/task-window-directive.html',
 			'<div class="taskWindow dropdown-menu" ng-style="{display: open&&\'block\' || \'none\', top: position.top+\'px\', right: position.right+\'px\'}">' +
-			'	<div task="task"></div>' +
+			'	<div task="task" not-save-old-task="true"></div>' +
 			'</div>'
 	);
 }]);
