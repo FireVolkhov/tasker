@@ -80,7 +80,7 @@ module.exports = function() {
 					"Today": "2014-07-04T10:00:00.000Z",
 					"Items": tasks
 				};
-			    return [200, angular.toJson(data), {}];
+				return [200, angular.toJson(data), {}];
 			});
 			$httpBackend.whenPOST('./SaveTask.json').respond(function(method, url, data){
 				var data = angular.fromJson(data),
@@ -91,10 +91,10 @@ module.exports = function() {
 					return [500, {"error": "Bad request"}, {}];
 				}
 
-			    if (data.Id){
+				if (data.Id){
 					// Ищем задачу
 					angular.forEach(tasks, function(t, i){
-					    if (t.Id == data.Id){
+						if (t.Id == data.Id){
 							task = t;
 						}
 					});

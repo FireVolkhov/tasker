@@ -20,7 +20,7 @@ angular.module('task-directive', ['template/components/task/task-directive.html'
 
 				scope.finished = function(){
 					var task = scope.task;
-					
+
 					if (task.$edit){
 						task.IsFinished = !task.IsFinished;
 					} else {
@@ -34,7 +34,7 @@ angular.module('task-directive', ['template/components/task/task-directive.html'
 				};
 
 				scope.$watch('task.$edit', function($edit){
-				    if ($edit){
+					if ($edit){
 						saveOldTask();
 					}
 				});
@@ -46,19 +46,19 @@ angular.module('task-directive', ['template/components/task/task-directive.html'
 
 				scope.save = function(){
 					extendOldTask();
-				    scope.task.$save().$promise.then(function(){
-				        scope.task.$edit = false;
+					scope.task.$save().$promise.then(function(){
+						scope.task.$edit = false;
 						scope.$emit('task-directive-save', scope.task);
-				    });
+					});
 				};
 
 				var removeListener = scope.$on('task-directive-newTask', function(event){
-				    scope.task = new Task({$edit: true});
+					scope.task = new Task({$edit: true});
 					saveOldTask();
 				});
 
 				scope.$on('destroy', function(){
-				    removeListener();
+					removeListener();
 				});
 
 				// Сохраняем данные до редактирования для возрата при отмене

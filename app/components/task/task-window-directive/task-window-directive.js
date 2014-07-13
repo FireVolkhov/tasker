@@ -24,7 +24,7 @@ angular.module('task-window-directive', ['template/components/task/task-window-d
 					event.stopPropagation();
 				});
 
-			    if (!scope.task){
+				if (!scope.task){
 					scope.task = getNewTask();
 				}
 

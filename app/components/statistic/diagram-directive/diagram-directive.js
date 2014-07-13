@@ -57,16 +57,16 @@ angular.module('diagram-directive', ['template/components/diagram/diagram-direct
 
 				var removeListerSlice = scope.$watch('slices', updateListener);
 				var removeListerUpdate = scope.$on('diagram-update', function(event, slices){
-				    updateListener(slices);
+					updateListener(slices);
 				});
 
 				scope.$on('destroy', function(){
-				    removeListerSlice();
+					removeListerSlice();
 					removeListerUpdate();
 				});
 
 				function updateListener(slices){
-				    slices = angular.copy(slices);
+					slices = angular.copy(slices);
 					if (scope.config.animate){
 						animate(slices);
 					} else {
@@ -79,7 +79,7 @@ angular.module('diagram-directive', ['template/components/diagram/diagram-direct
 				 * @param slices
 				 */
 				function animate(slices){
-				    stopAnimate();
+					stopAnimate();
 
 					targetSlices = slices;
 					startTime = now();
@@ -90,13 +90,13 @@ angular.module('diagram-directive', ['template/components/diagram/diagram-direct
 						targetTotalValue = 0;
 						nowSlices = angular.copy(slices);
 						angular.forEach(nowSlices, function(slice){
-						    targetTotalValue += slice.value;
+							targetTotalValue += slice.value;
 							slice.value = 0;
 						});
 					}
 
 					angular.forEach(nowSlices, function(slice){
-					    slice.startValue = slice.value;
+						slice.startValue = slice.value;
 					});
 
 					startAnimate();
@@ -138,7 +138,7 @@ angular.module('diagram-directive', ['template/components/diagram/diagram-direct
 				 */
 				function animateValue(start, now, target, startTime, nowTime, targetTime){
 					var percent = (nowTime - startTime) / (targetTime - startTime);
-				    return (target - start) * percent + start;
+					return (target - start) * percent + start;
 				}
 
 				/**
@@ -213,7 +213,7 @@ angular.module('diagram-directive', ['template/components/diagram/diagram-direct
 						endAngle = null;
 
 					angular.forEach(slices, function(slice){
-					    if (startAngle === null){
+						if (startAngle === null){
 							startAngle = slice.startAngle;
 						}
 						endAngle = slice.endAngle;
@@ -301,7 +301,7 @@ angular.module('diagram-directive', ['template/components/diagram/diagram-direct
 					angular.forEach(slices, function(slice){
 						var metrics;
 						// Добавляем половину чтоб текст был на середине отрезка
-					    slice.labelAngle = currentAngle + sliceAngle / 2;
+						slice.labelAngle = currentAngle + sliceAngle / 2;
 						currentAngle += sliceAngle;
 
 						slice.labelX = Math.cos(slice.labelAngle) * radius;
@@ -354,7 +354,7 @@ angular.module('diagram-directive', ['template/components/diagram/diagram-direct
 				}
 
 				function now(){
-				    return new Date().getTime();
+					return new Date().getTime();
 				}
 			}
 		};

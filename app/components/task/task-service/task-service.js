@@ -88,13 +88,13 @@ angular.module('task-service', [])
 					})
 					.then(function(tasks){
 						fireEvent('change', tasks);
-					    return tasks;
+						return tasks;
 					});
 
 				cached = true;
 			}
 
-		    return tasks;
+			return tasks;
 		}
 
 		/**
@@ -102,12 +102,12 @@ angular.module('task-service', [])
 		 * @returns {Task}
 		 */
 		function save(){
-		    var task = this;
+			var task = this;
 
 			task.$resolved = false;
 			task.$promise = $http.post('./SaveTask.json', task)
 				.finally(function(){
-				    task.$resolved = true;
+					task.$resolved = true;
 				})
 				.then(checkError)
 
@@ -116,10 +116,10 @@ angular.module('task-service', [])
 				.then(function(result){
 					var maxId = 0;
 
-				    if (!result.data || !result.data.Text){
+					if (!result.data || !result.data.Text){
 						result.data = angular.copy(task);
 						angular.forEach(tasks, function(task){
-						    maxId = task.Id > maxId ? task.Id : maxId;
+							maxId = task.Id > maxId ? task.Id : maxId;
 						});
 						result.data.Id = ++ maxId;
 					}
@@ -130,12 +130,12 @@ angular.module('task-service', [])
 				.then(function(result){
 					// Без Id значит создана новая задача добавляем в общий список
 					if (!task.Id && result.data.Id) tasks.push(task);
-				    angular.extend(task, updateStatus(result.data));
+					angular.extend(task, updateStatus(result.data));
 					return task;
 				})
 				.then(function(task){
 					fireEvent('change', task);
-				    fireEvent('save', task);
+					fireEvent('save', task);
 					return task;
 				});
 
@@ -147,7 +147,7 @@ angular.module('task-service', [])
 		 * @returns {[Task]}
 		 */
 		function updateAll(){
-		    cached = false;
+			cached = false;
 			return getAll();
 		}
 
@@ -183,11 +183,11 @@ angular.module('task-service', [])
 			date.setSeconds(0);
 			date.setMilliseconds(0);
 
-		    return date.getTime() || null;
+			return date.getTime() || null;
 		}
 
 		function checkError(result){
-		    if (result.data.error){
+			if (result.data.error){
 				return $q.reject(result.data.error);
 			}
 
@@ -198,34 +198,34 @@ angular.module('task-service', [])
 			if(angular.isDate(date) && angular.isDate(date2) && date2.getTime()){
 				date.setTime(date2.getTime());
 			}
-		    return date;
+			return date;
 		}
 
 		/**
 		 * Обновляет время и статусы задач
 		 */
 		timer = function(){
-		    var oldTime = now(),
+			var oldTime = now(),
 				interval = TIMER_INTERVAL,
 
-			wait = function(){
-				today.setTime(today.getTime() + now() - oldTime);
-				oldTime = now();
+				wait = function(){
+					today.setTime(today.getTime() + now() - oldTime);
+					oldTime = now();
 
-				angular.forEach(tasks, function(task){
-					updateStatus(task);
-				});
+					angular.forEach(tasks, function(task){
+						updateStatus(task);
+					});
 
-				fireEvent('change', tasks);
-				$rootScope.$apply();
+					fireEvent('change', tasks);
+					$rootScope.$apply();
 
-				setTimeout(wait, interval);
-			};
+					setTimeout(wait, interval);
+				};
 
 			setTimeout(wait, interval);
 
 			function now(){
-			    return new Date().getTime();
+				return new Date().getTime();
 			}
 		};
 		timer();

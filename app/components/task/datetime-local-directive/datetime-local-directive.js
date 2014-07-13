@@ -32,7 +32,7 @@ angular.module('datetime-local-directive', [])
 				});
 
 				function local2global(local){
-				    return new Date(local.getTime() + local.getTimezoneOffset() * 60 * 1000);
+					return new Date(local.getTime() + local.getTimezoneOffset() * 60 * 1000);
 				}
 			}
 		};
