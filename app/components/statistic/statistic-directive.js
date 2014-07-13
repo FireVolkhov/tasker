@@ -7,7 +7,7 @@
  */
 "use strict";
 
-angular.module('statistic-directive', ['template/components/statistic/statistic-directive.html', 'task-service', 'diagram-directive', 'center-directive'])
+angular.module('statistic-directive', ['template/components/statistic/statistic-directive.html', 'task-service', 'diagram-directive'])
 	.directive('statistic', ['Task', function(Task){
 		return {
 			scope: {},
@@ -33,8 +33,11 @@ angular.module('statistic-directive', ['template/components/statistic/statistic-
 					shadowBlur: 8,
 					shadowColor: "rgba( 0, 0, 0, 0.14 )",
 
-					smallLabelFont: "PF DinDisplay Pro Light, Verdana, Arial, Helvetica, sans-serif",
-					smallLabelFontSize: 16,
+					labelFont: "33.333px PF DinDisplay Pro Light, Verdana, Arial, Helvetica, sans-serif",
+					labelColor: "black",
+					labelCenterRadius: 5,		// Радиус размещения от центра
+
+					smallLabelFont: "16px PF DinDisplay Pro Light, Verdana, Arial, Helvetica, sans-serif",
 					smallLabelColor: "#a8a8a8",
 					offsetRadiusSmallLabel: 30		// Внешний отступ линиии для размещения текста
 				};
@@ -86,16 +89,6 @@ angular.module('template/components/statistic/statistic-directive.html', []).run
 	$templateCache.put('template/components/statistic/statistic-directive.html',
 			'<div class="statistic">' +
 			'	<div diagram="config" slices="slices"></div>' +
-			'	<table class="statistic-percent" center>' +
-			'		<tr>' +
-			'			<td class="statistic-percent-later">{{ count2percent(slices.later.value) + "%" }}</td>' +
-			'			<td class="statistic-percent-finished">{{ count2percent(slices.finished.value) + "%" }}</td>' +
-			'		</tr>' +
-			'		<tr>' +
-			'			<td class="statistic-percent-today">{{ count2percent(slices.today.value) + "%" }}</td>' +
-			'			<td class="statistic-percent-overdue">{{ count2percent(slices.overdue.value) + "%" }}</td>' +
-			'		</tr>' +
-			'	</table>' +
 			'</div>'
 	);
 }]);

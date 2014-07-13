@@ -27,8 +27,11 @@ angular.module('diagram-directive', ['template/components/diagram/diagram-direct
 		shadowBlur: 5,
 		shadowColor: "rgba( 0, 0, 0, 0.1 )",
 
-		smallLabelFont: "Verdana, sans-serif",
-		smallLabelFontSize: 16,
+		labelFont: "16px Verdana, sans-serif",
+		labelColor: "black",
+		labelCenterRadius: 20,		// Радиус размещения от центра
+
+		smallLabelFont: "16px Verdana, sans-serif",
 		smallLabelColor: "black",
 		offsetRadiusSmallLabel: 20		// Внешний отступ линиии для размещения текста
 	})
@@ -163,6 +166,7 @@ angular.module('diagram-directive', ['template/components/diagram/diagram-direct
 					angular.forEach(slices, function(slice){
 						slice.startAngle = 2 * Math.PI * currentPos;
 						slice.endAngle = 2 * Math.PI * (currentPos + (slice.value / totalValue));
+						slice.percent = Math.round(slice.value / totalValue * 100);
 						currentPos += slice.value / totalValue;
 					});
 
@@ -181,29 +185,43 @@ angular.module('diagram-directive', ['template/components/diagram/diagram-direct
 					// Очищаем область рисования
 					context.clearRect(0, 0, config.width, config.height);
 
-					drawShadow(context);
+					drawShadow(context, slices);
 
 					// Рисуем каждый сектор диаграммы
 					angular.forEach(slices, function(slice){
 						drawSlice(context, slice);
 					});
+
+					drawCenterText(context, slices);
 				}
 
 				/**
 				 * Тень
 				 * @param context
+				 * @param slices
 				 */
-				function drawShadow(context){
+				function drawShadow(context, slices){
 					var config = scope.config,
 						radius = Math.min(config.width, config.height) / 2 * (config.chartSizePercent / 100) - config.lineWidth / 2,
 
-					// рисуем от центра диаграммы
+					// Рисуем от центра диаграммы
 						centerX = config.width/2,
-						centerY = config.height/ 2;
+						centerY = config.height/ 2,
+
+					// Рисуем тень только под графиком
+						startAngle = null,
+						endAngle = null;
+
+					angular.forEach(slices, function(slice){
+					    if (startAngle === null){
+							startAngle = slice.startAngle;
+						}
+						endAngle = slice.endAngle;
+					});
 
 					// Рисуем тень
 					context.beginPath();
-					context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+					context.arc(centerX, centerY, radius, startAngle + config.chartStartAngle, endAngle + config.chartStartAngle, false);
 					context.lineWidth = config.lineWidth;
 					context.shadowOffsetX = config.shadowOffsetX;
 					context.shadowOffsetY = config.shadowOffsetY;
@@ -234,7 +252,7 @@ angular.module('diagram-directive', ['template/components/diagram/diagram-direct
 						centerY = config.height/ 2,
 
 						smallLabelX = centerX + Math.cos(startAngle) * smallLabelRadius,
-						smallLabelY = centerY + Math.sin(startAngle) * smallLabelRadius + config.smallLabelFontSize/3;
+						smallLabelY = centerY + Math.sin(startAngle) * smallLabelRadius;
 
 					if (slice.startAngle != slice.endAngle){
 						// Рисуем сектор
@@ -247,19 +265,92 @@ angular.module('diagram-directive', ['template/components/diagram/diagram-direct
 						// Пишем текст
 						context.fillStyle = slice.smallLabelColor ? slice.smallLabelColor : config.smallLabelColor;
 						context.textAlign = 'center';
-						context.font = config.smallLabelFontSize + 'px ' + config.smallLabelFont;
-						context.fillText(angle2percent(slice.startAngle), smallLabelX, smallLabelY);
+						context.textBaseline = 'middle';
+						context.font = config.smallLabelFont;
+						context.fillText(slice.percent, smallLabelX, smallLabelY);
 					}
 				}
 
 				/**
-				 * Угол в процент
-				 * @param angle
-				 * @returns {number}
+				 * Рисуем центральный текст
+				 * @param context
+				 * @param slices
 				 */
-				function angle2percent(angle){
-					var value = angle / (2 * Math.PI) * 100;
-					return Math.round(value >= 100 ? value - 100 : value);
+				function drawCenterText(context, slices){
+					var config = scope.config,
+						radius = config.labelCenterRadius,
+						count = 0,
+						sliceAngle,
+						currentAngle = config.chartStartAngle,
+
+					// Размеры левой и правой сторон
+						rightBlockWidth = 0,
+						leftBlockWidth = 0,
+
+					// рисуем от центра диаграммы
+						centerX = config.width/2,
+						centerY = config.height/ 2;
+
+					angular.forEach(slices, function(){
+						count ++;
+					});
+
+					sliceAngle = Math.PI * 2 / count;
+
+					// Определяем размеры лабелов и блоков
+					angular.forEach(slices, function(slice){
+						var metrics;
+						// Добавляем половину чтоб текст был на середине отрезка
+					    slice.labelAngle = currentAngle + sliceAngle / 2;
+						currentAngle += sliceAngle;
+
+						slice.labelX = Math.cos(slice.labelAngle) * radius;
+						slice.labelY = Math.sin(slice.labelAngle) * radius;
+						slice.labelText = slice.percent + '%';
+
+						context.fillStyle = slice.labelColor ? slice.labelColor : config.labelColor;
+						context.font = config.labelFont;
+						metrics = context.measureText(slice.labelText);
+						slice.labelWidth = metrics.width;
+
+						if (slice.labelX > 0){
+							rightBlockWidth = Math.max(rightBlockWidth, slice.labelWidth);
+						}
+						if (slice.labelX < 0){
+							leftBlockWidth = Math.max(leftBlockWidth, slice.labelWidth);
+						}
+					});
+
+					// Рисуем
+					angular.forEach(slices, function(slice){
+						var x = slice.labelX,
+							y = slice.labelY,
+
+						// Положение текста
+							textX = centerX + x,
+							textY = centerY + y;
+
+						// Пишем текст
+						context.fillStyle = slice.labelColor ? slice.labelColor : config.labelColor;
+						context.font = config.labelFont;
+						context.textAlign = 'right';
+
+						if (x > 0){
+							textX += rightBlockWidth;
+						} else if (x == 0) {
+							textX -= slice.labelWidth/2;
+						}
+
+						if (y == 0){
+							context.textBaseline = 'middle';
+						} else if (y > 0){
+							context.textBaseline = 'hanging';
+						} else {
+							context.textBaseline = 'alphabetic';
+						}
+
+						context.fillText(slice.labelText, textX, textY);
+					});
 				}
 
 				function now(){
