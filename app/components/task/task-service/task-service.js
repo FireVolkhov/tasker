@@ -38,8 +38,6 @@ angular.module('task-service', [])
 			this.FinishTime = null;
 
 			this.$status = null;
-			this.$edit = false;
-			this.$hide = false;
 
 			this.$resolved = true;
 			this.$promise = null;
@@ -133,8 +131,6 @@ angular.module('task-service', [])
 					// Без Id значит создана новая задача добавляем в общий список
 					if (!task.Id && result.data.Id) tasks.push(task);
 				    angular.extend(task, updateStatus(result.data));
-					task.$edit = false;
-					task.$hide = false;
 					return task;
 				})
 				.then(function(task){
