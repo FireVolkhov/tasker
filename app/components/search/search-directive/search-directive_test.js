@@ -19,7 +19,7 @@ describe('search-directive', function(){
 		searchInput().sendKeys('задач');
 		element(by.css('.search ul')).getText().then(function(text){
 			matches.forEach(function(task){
-			    expect(text).toContain(task);
+				expect(text).toContain(task);
 			});
 		});
 
@@ -64,22 +64,22 @@ describe('search-directive', function(){
 	 * @returns {promise}
 	 */
 	var isDisplayedInScroll = function(query){
-	    return element(by.css(query)).isDisplayed().then(function(displayed){
-	        if (!displayed) return false;
+		return element(by.css(query)).isDisplayed().then(function(displayed){
+			if (!displayed) return false;
 
 			return ptor.driver.executeScript(
-			    "var query = '" + query + "'," +
-				"	elem = document.querySelector(query)," +
-				"	parent = elem.parentNode," +
+					"var query = '" + query + "'," +
+					"	elem = document.querySelector(query)," +
+					"	parent = elem.parentNode," +
 
-				"	visibleUp = parent.scrollTop," +
-				"	visibleDown = parent.scrollTop + parent.offsetHeight," +
-				"	elemUp = elem.offsetTop," +
-				"	elemDown = elem.offsetTop + elem.offsetHeight;" +
+					"	visibleUp = parent.scrollTop," +
+					"	visibleDown = parent.scrollTop + parent.offsetHeight," +
+					"	elemUp = elem.offsetTop," +
+					"	elemDown = elem.offsetTop + elem.offsetHeight;" +
 
-				"return (elemUp >= visibleUp && elemUp < visibleDown) ||" +
-				"	(elemDown > visibleUp && elemDown <= visibleDown)"
+					"return (elemUp >= visibleUp && elemUp < visibleDown) ||" +
+					"	(elemDown > visibleUp && elemDown <= visibleDown)"
 			);
-	    });
+		});
 	};
 });

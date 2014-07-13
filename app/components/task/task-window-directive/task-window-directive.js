@@ -24,7 +24,7 @@ angular.module('task-window-directive', ['template/components/task/task-window-d
 					event.stopPropagation();
 				});
 
-			    if (!scope.task){
+				if (!scope.task){
 					scope.task = getNewTask();
 				}
 
@@ -43,7 +43,7 @@ angular.module('task-window-directive', ['template/components/task/task-window-d
 angular.module('template/components/task/task-window-directive.html', []).run(['$templateCache', function($templateCache) {
 	$templateCache.put('template/components/task/task-window-directive.html',
 			'<div class="taskWindow dropdown-menu" ng-style="{display: open&&\'block\' || \'none\', top: position.top+\'px\', right: position.right+\'px\'}">' +
-			'	<div task="task" not-save-old-task="true"></div>' +
+			'	<div task="task"></div>' +
 			'</div>'
 	);
 }]);

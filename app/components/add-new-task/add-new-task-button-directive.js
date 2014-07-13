@@ -13,7 +13,7 @@ angular.module('add-new-task-button-directive', ['template/add-new-task/add-new-
 			replace: true,
 			templateUrl: "template/add-new-task/add-new-task-button.html",
 			link: function(scope, elem, attrs){
-			    scope.open = false;
+				scope.open = false;
 
 				scope.openWin = function(){
 					scope.open = !scope.open;
@@ -57,9 +57,9 @@ angular.module('add-new-task-button-directive', ['template/add-new-task/add-new-
 
 angular.module('template/add-new-task/add-new-task-button.html', []).run(['$templateCache', function($templateCache) {
 	$templateCache.put('template/add-new-task/add-new-task-button.html',
-		'<div class="addNewTaskButton">' +
-		'	<i class="addNewTaskButton-iconPlus" ng-click="openWin()"></i>' +
-		'	<div task-window open="open" position="position"></div>' +
-		'</div>'
+			'<div class="addNewTaskButton">' +
+			'	<i class="addNewTaskButton-iconPlus" ng-click="openWin()"></i>' +
+			'	<div task-window open="open" position="position"></div>' +
+			'</div>'
 	);
 }]);

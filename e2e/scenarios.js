@@ -11,7 +11,7 @@ describe('Start', function(){
 	it('Open page', function(){
 		var mockModule = require('./mocked-backend');
 		var ptor = protractor.getInstance();
-//		ptor.addMockModule('httpBackendMock', mockModule);
+		ptor.addMockModule('httpBackendMock', mockModule);
 		ptor.get('http://localhost:63342/tasker/index.html');
 		expect(ptor.getCurrentUrl()).toContain('tasker');
 		expect(ptor.getTitle()).toContain('Просмотор задач');

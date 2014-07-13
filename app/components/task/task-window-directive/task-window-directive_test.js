@@ -23,19 +23,19 @@ describe('task-window-directive', function(){
 				return element(by.css('.addNewTaskButton .taskWindow [data-ng-model="task.Text"]'));
 			},
 			dueTime: function(){
-			    return element(by.css('.addNewTaskButton .taskWindow [data-ng-model="task.DueTime"]'));
+				return element(by.css('.addNewTaskButton .taskWindow [data-ng-model="task.DueTime"]'));
 			},
 			addButton: function(){
 				return element(by.css('.addNewTaskButton i'));
 			},
 			saveButton: function(){
-			    return element(by.css('.addNewTaskButton')).element(by.buttonText('Сохранить'));
+				return element(by.css('.addNewTaskButton')).element(by.buttonText('Сохранить'));
 			},
 			taskWindow: function(){
-			    return element(by.css('.addNewTaskButton .taskWindow'));
+				return element(by.css('.addNewTaskButton .taskWindow'));
 			},
 			taskList: function(){
-			    return element(by.css('.tasksList'))
+				return element(by.css('.tasksList'))
 			}
 		};
 
@@ -50,7 +50,6 @@ describe('task-window-directive', function(){
 		elements.addButton().click();
 
 		expect(elements.text().getAttribute('value')).toBe(task.Text);
-//		expect(elements.dueTime().getAttribute('value')).toBe(task.DueTime);
 	});
 	it('Сохранение', function() {
 		elements.saveButton().click();
@@ -74,7 +73,6 @@ describe('task-window-directive', function(){
 		elements.addButton().click();
 
 		expect(elements.text().getAttribute('value')).toBe('');
-//		expect(elements.dueTime().getAttribute('value')).toBe('');
 
 		elements.addButton().click();
 	});

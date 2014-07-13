@@ -15,7 +15,7 @@ angular.module('search-directive', ['search-templates', 'task-service', 'ui.boot
 			link: function(scope, elem, attrs){
 				scope.tasks = Task.getAll();
 				scope.edit = function(task){
-				    scope.task = null;
+					scope.task = null;
 					task.$edit = true;
 					task.$hide = false;
 				};
